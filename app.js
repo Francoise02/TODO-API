@@ -61,8 +61,8 @@ app.use((req, res, next) => {
   
   app.use("/", Router);
   
-  // app.use((req, res, next) => {
-  //   const error = Error("Not found");
-  //   res.statusCode = 404;
-  //   res.send({ error: error.message });
-  // });
+  app.use((req, res, next) => {
+    const error = Error("Not found");
+    res.statusCode = 404;
+    res.send({ error: error.message });
+  });
