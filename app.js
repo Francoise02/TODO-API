@@ -7,18 +7,31 @@ const app = express();
 app.use(express.json());
 
 const username = "Francoise";
-const password = "12345";
-const cluster = "cluster0.ov7s3";
+const password = "root";
+const cluster = "cluster0";
 const dbname = "Assignment1";
 
+// mongoose.connect(process.env.MONGODB_URI,{
+//   useNewUrlParser: true,
+//   useUnifiedTopology: true,
+
+// })
+
 mongoose.connect(
-  `mongodb+srv://${username}:${password}@${cluster}.mongodb.net/${dbname}?retryWrites=true&w=majority`, 
+  process.env.MONGODB_URI || `mongodb+srv://${username}:${password}@${cluster}.ov7s3.mongodb.net/${dbname}?retryWrites=true&w=majority`,
   {
     useNewUrlParser: true,
-    // useFindAndModify: false,
     useUnifiedTopology: true
   }
 );
+
+// mongoose.connect(
+//   `mongodb+srv://${username}:${password}@${cluster}.mongodb.net/${dbname}?retryWrites=true&w=majority`, 
+//   {
+//     useNewUrlParser: true,
+//     useUnifiedTopology: true
+//   }
+// );
 
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "connection error: "));
@@ -46,10 +59,10 @@ app.use((req, res, next) => {
     next();
   });
   
-  app.use("/dojos", Router);
+  app.use("/", Router);
   
-  app.use((req, res, next) => {
-    const error = Error("Not found");
-    res.statusCode = 404;
-    res.send({ error: error.message });
-  });
+  // app.use((req, res, next) => {
+  //   const error = Error("Not found");
+  //   res.statusCode = 404;
+  //   res.send({ error: error.message });
+  // });

@@ -1,22 +1,22 @@
 const mongoose = require("mongoose");
-const { boolean } = require("webidl-conversions");
+// const { boolean } = require("webidl-conversions");
 
-const UserSchema = new mongoose.Schema({
-  id: {
-    type: Number,
-    required: true,
-  },
+const taskSchema = new mongoose.Schema({
+  // id: {
+  //   type: Number,
+  //   required: true,
+  // },
   task: {
     type: String,
     required: true,
   },
 
   is_completed: {
-      type: boolean,
+      type: Boolean,
       required: true,
   }
 });
 
-const User = mongoose.model("User", UserSchema);
+const task = mongoose.model("Task", taskSchema);
 
-module.exports = User;
+module.exports = task;
